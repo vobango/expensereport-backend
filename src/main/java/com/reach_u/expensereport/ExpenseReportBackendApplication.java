@@ -1,4 +1,4 @@
-package com.example.ExpenseReport_Backend;
+package com.reach_u.expensereport;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
