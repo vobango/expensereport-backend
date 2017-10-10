@@ -14,6 +14,14 @@ import java.util.*;
 public class ReportService {
     private static List<Report> reports = new ArrayList<>();
 
+    {
+       reports.add(new Report("Aino Ainus", new Date(), new Date()));
+       for (int i=0; i < reports.size();i++) {
+           reports.get(i).setReportId(i+1);
+       }
+       reports.get(0).setDocuments(new ExpenseDoc(1, new Date(), "Radisson", "Housing", "Testing", "ExpRep", 150, "EUR", false));
+    }
+
     public List list() {
         return reports;
     }
