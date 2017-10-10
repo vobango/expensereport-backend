@@ -1,6 +1,6 @@
 package com.reach_u.expensereport.controller;
 
-import com.reach_u.expensereport.*;
+
 import com.reach_u.expensereport.model.Report;
 import com.reach_u.expensereport.service.ReportService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,7 +12,7 @@ import java.util.List;
 @RestController
 public class ReportController {
 
-    private ReportService reportService;
+    private ReportService reportService = new ReportService();
 
     @GetMapping("/reports")
     public List getReports() {

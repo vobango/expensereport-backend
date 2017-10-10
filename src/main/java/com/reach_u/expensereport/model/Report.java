@@ -1,7 +1,6 @@
 package com.reach_u.expensereport.model;
 
 import java.util.*;
-import com.reach_u.expensereport.*;
 
 public class Report {
 
@@ -22,6 +21,10 @@ public class Report {
 
     public int getReportId() {
         return reportId;
+    }
+
+    public void setReportId(int reportId) {
+        this.reportId = reportId;
     }
 
     public String getEmployee() {
