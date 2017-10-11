@@ -7,15 +7,15 @@ public class Report {
 
     private int reportId;
     private String employee;
-    private String startDate;
-    private String endDate;
+    private Date startDate;
+    private Date endDate;
     private List<ExpenseDoc> documents = new ArrayList<>();
     private double expenseSum; //employee's total expenses
     private double creditSum; //amount paid with credit card
     private double totalSum; //amount to be paid to employee = expenseSum - creditSum (in €)
     private String status;
 
-    public Report(String employee, String startDate, String endDate) {
+    public Report(String employee, Date startDate, Date endDate) {
         this.employee = employee;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -24,8 +24,8 @@ public class Report {
 
     public Report() {
         this.status = "ACTIVE";
-        this.startDate = new SimpleDateFormat("dd.MM.yy").format(new Date());
-        this.endDate = new SimpleDateFormat("dd.MM.yy").format(new Date());
+        this.startDate = new Date();
+        this.endDate = new Date();
     }
 
     public int getReportId() {
@@ -40,11 +40,11 @@ public class Report {
         return employee;
     }
 
-    public String getStartDate() {
+    public Date getStartDate() {
         return startDate;
     }
 
-    public String getEndDate() {
+    public Date getEndDate() {
         return endDate;
     }
 

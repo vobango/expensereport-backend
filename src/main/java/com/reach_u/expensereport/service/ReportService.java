@@ -28,11 +28,11 @@ public class ReportService {
      */
     {
         //Create a new Report and add to list
-       reports.add(new Report("Aino Ainus", new SimpleDateFormat("dd.MM.yy").format(new Date()), new SimpleDateFormat("dd.MM.yy").format(new Date())));
+       reports.add(new Report("Aino Ainus", new Date(), new Date()));
 
         //Create two Expense documents and add them to the report
-       documents.add(new ExpenseDoc(new SimpleDateFormat("dd.MM.yy").format(new Date()), "Radisson", "Housing", "Testing", "ExpRep", 150, Currency.GBP, true));
-       documents.add(new ExpenseDoc(new SimpleDateFormat("dd.MM.yy").format(new Date()), "EasyJet", "Travel", "Testing", "ExpRep", 100, Currency.EUR, false));
+       documents.add(new ExpenseDoc(new Date(), "Radisson", "Housing", "Testing", "ExpRep", 150, Currency.GBP, true));
+       documents.add(new ExpenseDoc(new Date(), "EasyJet", "Travel", "Testing", "ExpRep", 100, Currency.EUR, false));
        reports.get(0).setDocuments(documents);
 
        //Set IDs for Report and Expense documents

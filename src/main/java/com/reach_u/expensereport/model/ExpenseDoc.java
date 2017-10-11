@@ -11,7 +11,7 @@ public class ExpenseDoc {
 
     private int reportId; //which report this document belongs to
     private int docId; //document's ID in the current report
-    private String date;
+    private Date date;
     private String issuer;
     private String content;
     private String field;
@@ -20,7 +20,7 @@ public class ExpenseDoc {
     private Currency currency;
     private boolean creditCard;
 
-    public ExpenseDoc(String date, String issuer, String content, String field, String project, double sum, Currency currency, boolean creditCard) {
+    public ExpenseDoc(Date date, String issuer, String content, String field, String project, double sum, Currency currency, boolean creditCard) {
         this.date = date;
         this.issuer = issuer;
         this.content = content;
@@ -49,7 +49,7 @@ public class ExpenseDoc {
         this.docId = docId;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
