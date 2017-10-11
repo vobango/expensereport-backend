@@ -9,9 +9,9 @@ import java.util.Date;
  */
 public class ExpenseDoc {
 
-    private int reportId;
-    private int docId;
-    private Date date;
+    private int reportId; //which report this document belongs to
+    private int docId; //documents ID in the current report
+    private String date;
     private String issuer;
     private String content;
     private String field;
@@ -20,8 +20,9 @@ public class ExpenseDoc {
     private Currency currency;
     private boolean creditCard;
 
-    public ExpenseDoc(int reportId, Date date, String issuer, String content, String field, String project, double sum, Currency currency, boolean creditCard) {
+    public ExpenseDoc(int reportId, int docId, String date, String issuer, String content, String field, String project, double sum, Currency currency, boolean creditCard) {
         this.reportId = reportId;
+        this.docId = docId;
         this.date = date;
         this.issuer = issuer;
         this.content = content;
@@ -44,7 +45,7 @@ public class ExpenseDoc {
         this.docId = docId;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 

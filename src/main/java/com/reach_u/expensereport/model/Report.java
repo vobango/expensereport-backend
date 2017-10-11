@@ -6,15 +6,15 @@ public class Report {
 
     private int reportId;
     private String employee;
-    private Date startDate;
-    private Date endDate;
+    private String startDate;
+    private String endDate;
     private List<ExpenseDoc> documents = new ArrayList<>();
-    private double creditSum;
-    private double expenseSum;
-    private double totalSum;
+    private double creditSum; //amount paid with credit card
+    private double expenseSum; //employee's own expenses
+    private double totalSum; //amount to be paid to employee = expenseSum - creditSum
     private String status;
 
-    public Report(String employee,Date startDate, Date endDate) {
+    public Report(String employee,String startDate, String endDate) {
         this.employee = employee;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -33,11 +33,11 @@ public class Report {
         return employee;
     }
 
-    public Date getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
 
-    public Date getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
 
@@ -49,36 +49,27 @@ public class Report {
         documents.add(document);
         if (document.creditCardUsed()) {
             this.setCreditSum(document.getSum());
+            this.setExpenseSum(document.getSum());
         }
         else {
             this.setExpenseSum(document.getSum());
-            this.totalSum += expenseSum;
+            this.setTotalSum(document.getSum());
         }
     }
 
-    public double getCreditSum() {
-        return creditSum;
-    }
+    public double getCreditSum() { return creditSum; }
 
-    public void setCreditSum(double sum) {
-        creditSum += sum;
-    }
+    public void setCreditSum(double sum){ creditSum += sum; }
 
-    public double getExpenseSum() {
-        return expenseSum;
-    }
+    public double getExpenseSum() { return expenseSum; }
 
-   public void setExpenseSum(double sum) {
-        expenseSum += sum;
-    }
+   public void setExpenseSum(double sum) { expenseSum += sum; }
 
-    public double getTotalSum() {
-        return totalSum;
-    }
+    public double getTotalSum() { return totalSum; }
 
-    public String getStatus() {
-        return status;
-    }
+    public void setTotalSum(double sum) { this.totalSum += sum; }
+
+    public String getStatus() { return status; }
 
     public void setStatus(String status) {
         this.status = status.toUpperCase();
