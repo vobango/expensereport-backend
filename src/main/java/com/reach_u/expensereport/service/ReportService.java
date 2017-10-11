@@ -3,7 +3,6 @@ package com.reach_u.expensereport.service;
 import com.reach_u.expensereport.model.*;
 import com.reach_u.expensereport.model.Currency;
 
-import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -42,6 +41,7 @@ public class ReportService {
                doc.setReportId(reportCounter.get());
                doc.setDocId(expenseDocCounter.incrementAndGet());
            }
+           expenseDocCounter.set(0);
        }
     }
 
@@ -63,12 +63,12 @@ public class ReportService {
 
     //Method for POST request
     public Report create(Report report) {
-        AtomicInteger docCounter = new AtomicInteger();
         report.setReportId(reportCounter.incrementAndGet());
         for (ExpenseDoc doc : report.getDocuments()) {
-            doc.setDocId(docCounter.incrementAndGet());
+            doc.setDocId(expenseDocCounter.incrementAndGet());
             doc.setReportId(reportCounter.get());
         }
+        expenseDocCounter.set(0);
         reports.add(report);
         return report;
     }

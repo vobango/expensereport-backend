@@ -1,6 +1,5 @@
 package com.reach_u.expensereport.model;
 
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class Report {
@@ -71,7 +70,7 @@ public class Report {
 
     public double getExpenseSum() { return expenseSum; }
 
-   public void setExpenseSum(double sum) { expenseSum += sum; }
+    public void setExpenseSum(double sum) { expenseSum += sum; }
 
     public double getTotalSum() { return totalSum; }
 

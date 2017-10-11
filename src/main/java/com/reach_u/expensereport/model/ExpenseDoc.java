@@ -31,7 +31,9 @@ public class ExpenseDoc {
         this.creditCard = creditCard;
     }
 
-    public ExpenseDoc() {}
+    public ExpenseDoc() {
+        this.date = new Date();
+    }
 
     public int getReportId() {
         return reportId;
