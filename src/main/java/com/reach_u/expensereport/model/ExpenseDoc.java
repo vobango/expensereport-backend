@@ -16,18 +16,18 @@ public class ExpenseDoc {
     private String content;
     private String field;
     private String project;
-    private int sum;
-    private String currency;
+    private double sum;
+    private Currency currency;
     private boolean creditCard;
 
-    public ExpenseDoc(int reportId, Date date, String issuer, String content, String field, String project, int sum, String currency, boolean creditCard) {
+    public ExpenseDoc(int reportId, Date date, String issuer, String content, String field, String project, double sum, Currency currency, boolean creditCard) {
         this.reportId = reportId;
         this.date = date;
         this.issuer = issuer;
         this.content = content;
         this.field = field;
         this.project = project;
-        this.sum = sum;
+        this.sum = sum * currency.getRate();
         this.currency = currency;
         this.creditCard = creditCard;
     }
@@ -64,11 +64,11 @@ public class ExpenseDoc {
         return project;
     }
 
-    public int getSum() {
+    public double getSum() {
         return sum;
     }
 
-    public String getCurrency() {
+    public Currency getCurrency() {
         return currency;
     }
 
