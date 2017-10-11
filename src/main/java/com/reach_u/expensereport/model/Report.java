@@ -12,17 +12,17 @@ public class Report {
     private double expenseSum; //employee's total expenses
     private double creditSum; //amount paid with credit card
     private double totalSum; //amount to be paid to employee = expenseSum - creditSum (in €)
-    private String status;
+    private ReportStatus status;
 
     public Report(String employee, Date startDate, Date endDate) {
         this.employee = employee;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.status = "ACTIVE";
+        this.status = ReportStatus.Active;
     }
 
     public Report() {
-        this.status = "ACTIVE";
+        this.status = ReportStatus.Active;
         this.startDate = new Date();
         this.endDate = new Date();
     }
@@ -76,9 +76,9 @@ public class Report {
 
     public void setTotalSum(double sum) { this.totalSum += sum; }
 
-    public String getStatus() { return status; }
+    public ReportStatus getStatus() { return status; }
 
-    public void setStatus(String status) {
-        this.status = status.toUpperCase();
+    public void setStatus(ReportStatus status) {
+        this.status = status;
     }
 }
