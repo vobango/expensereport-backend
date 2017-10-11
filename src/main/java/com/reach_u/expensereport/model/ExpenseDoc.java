@@ -17,7 +17,6 @@ public class ExpenseDoc {
     private String field;
     private String project;
     private double sum;
-    private double sumEur;
     private Currency currency;
     private boolean creditCard;
 
@@ -28,10 +27,11 @@ public class ExpenseDoc {
         this.field = field;
         this.project = project;
         this.sum = sum;
-        this.sumEur = sum*currency.getRate();
         this.currency = currency;
         this.creditCard = creditCard;
     }
+
+    public ExpenseDoc() {}
 
     public int getReportId() {
         return reportId;
@@ -74,14 +74,14 @@ public class ExpenseDoc {
     }
 
     public double getSumEur() {
-        return sumEur;
+        return sum*currency.getRate();
     }
 
     public Currency getCurrency() {
         return currency;
     }
 
-    public boolean creditCardUsed() {
+    public boolean getCreditCard() {
         return creditCard;
     }
 }

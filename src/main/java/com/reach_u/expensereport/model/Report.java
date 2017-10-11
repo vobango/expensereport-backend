@@ -1,5 +1,6 @@
 package com.reach_u.expensereport.model;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class Report {
@@ -9,16 +10,22 @@ public class Report {
     private String startDate;
     private String endDate;
     private List<ExpenseDoc> documents = new ArrayList<>();
-    private double creditSum; //amount paid with credit card
     private double expenseSum; //employee's own expenses
+    private double creditSum; //amount paid with credit card
     private double totalSum; //amount to be paid to employee = expenseSum - creditSum (in €)
     private String status;
 
-    public Report(String employee,String startDate, String endDate) {
+    public Report(String employee, String startDate, String endDate) {
         this.employee = employee;
         this.startDate = startDate;
         this.endDate = endDate;
         this.status = "ACTIVE";
+    }
+
+    public Report() {
+        this.status = "ACTIVE";
+        this.startDate = new SimpleDateFormat("dd.MM.yy").format(new Date());
+        this.endDate = new SimpleDateFormat("dd.MM.yy").format(new Date());
     }
 
     public int getReportId() {
@@ -45,15 +52,16 @@ public class Report {
         return documents;
     }
 
-    public void setDocuments(ExpenseDoc document) {
-        documents.add(document);
-        if (document.creditCardUsed()) {
-            this.setCreditSum(document.getSumEur());
-            this.setExpenseSum(document.getSumEur());
-        }
-        else {
-            this.setExpenseSum(document.getSumEur());
-            this.setTotalSum(document.getSumEur());
+    public void setDocuments(List<ExpenseDoc> documents) {
+        for (ExpenseDoc doc : documents) {
+            this.documents.add(doc);
+            if (doc.getCreditCard()) {
+                this.setCreditSum(doc.getSumEur());
+                this.setExpenseSum(doc.getSumEur());
+            } else {
+                this.setExpenseSum(doc.getSumEur());
+                this.setTotalSum(doc.getSumEur());
+            }
         }
     }
 
