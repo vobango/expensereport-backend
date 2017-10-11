@@ -11,7 +11,7 @@ public class Report {
     private List<ExpenseDoc> documents = new ArrayList<>();
     private double creditSum; //amount paid with credit card
     private double expenseSum; //employee's own expenses
-    private double totalSum; //amount to be paid to employee = expenseSum - creditSum
+    private double totalSum; //amount to be paid to employee = expenseSum - creditSum (in €)
     private String status;
 
     public Report(String employee,String startDate, String endDate) {
@@ -48,12 +48,12 @@ public class Report {
     public void setDocuments(ExpenseDoc document) {
         documents.add(document);
         if (document.creditCardUsed()) {
-            this.setCreditSum(document.getSum());
-            this.setExpenseSum(document.getSum());
+            this.setCreditSum(document.getSumEur());
+            this.setExpenseSum(document.getSumEur());
         }
         else {
-            this.setExpenseSum(document.getSum());
-            this.setTotalSum(document.getSum());
+            this.setExpenseSum(document.getSumEur());
+            this.setTotalSum(document.getSumEur());
         }
     }
 
