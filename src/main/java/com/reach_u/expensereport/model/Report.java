@@ -10,7 +10,7 @@ public class Report {
     private String startDate;
     private String endDate;
     private List<ExpenseDoc> documents = new ArrayList<>();
-    private double expenseSum; //employee's own expenses
+    private double expenseSum; //employee's total expenses
     private double creditSum; //amount paid with credit card
     private double totalSum; //amount to be paid to employee = expenseSum - creditSum (in €)
     private String status;

@@ -10,7 +10,7 @@ import java.util.Date;
 public class ExpenseDoc {
 
     private int reportId; //which report this document belongs to
-    private int docId; //documents ID in the current report
+    private int docId; //document's ID in the current report
     private String date;
     private String issuer;
     private String content;

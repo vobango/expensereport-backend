@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
+
 /**
  * Database "replacement" for expense reports
  *
@@ -15,13 +16,15 @@ import java.util.concurrent.atomic.AtomicInteger;
  ** Adds methods for using report list / single report data.
  */
 public class ReportService {
+
     private static List<Report> reports = new ArrayList<>();
     private static List<ExpenseDoc> documents = new ArrayList<>();
     private AtomicInteger reportCounter = new AtomicInteger();
     private AtomicInteger expenseDocCounter = new AtomicInteger();
 
-    /**
-     * Dummy data for testing purposes
+
+    /*
+     * Dummy data creation for testing purposes
      */
     {
         //Create a new Report and add to list
@@ -41,6 +44,7 @@ public class ReportService {
            }
        }
     }
+
 
     //Method for getting all Reports with GET
     public List<Report> list() {
