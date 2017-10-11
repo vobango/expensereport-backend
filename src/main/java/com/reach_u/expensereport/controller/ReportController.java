@@ -15,7 +15,7 @@ public class ReportController {
     private ReportService reportService = new ReportService();
 
     @GetMapping("/reports")
-    public List getReports() {
+    public List<Report> getReports() {
         return reportService.list();
     }
 

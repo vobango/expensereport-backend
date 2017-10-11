@@ -1,7 +1,9 @@
 package com.reach_u.expensereport.service;
 
 import com.reach_u.expensereport.model.*;
+import com.reach_u.expensereport.model.Currency;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -19,10 +21,10 @@ public class ReportService {
        for (int i=0; i < reports.size();i++) {
            reports.get(i).setReportId(i+1);
        }
-       reports.get(0).setDocuments(new ExpenseDoc(1, new Date(), "Radisson", "Housing", "Testing", "ExpRep", 150, "EUR", false));
+       reports.get(0).setDocuments(new ExpenseDoc(1, new Date(), "Radisson", "Housing", "Testing", "ExpRep", 150, Currency.GBP, false));
     }
 
-    public List list() {
+    public List<Report> list() {
         return reports;
     }
 

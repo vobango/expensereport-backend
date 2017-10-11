@@ -9,14 +9,16 @@ public class Report {
     private Date startDate;
     private Date endDate;
     private List<ExpenseDoc> documents = new ArrayList<>();
-    private int creditSum;
-    private int expenseSum;
-    private int totalSum;
+    private double creditSum;
+    private double expenseSum;
+    private double totalSum;
+    private String status;
 
     public Report(String employee,Date startDate, Date endDate) {
         this.employee = employee;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.status = "ACTIVE";
     }
 
     public int getReportId() {
@@ -54,24 +56,31 @@ public class Report {
         }
     }
 
-    public int getCreditSum() {
+    public double getCreditSum() {
         return creditSum;
     }
 
-    public void setCreditSum(int sum) {
+    public void setCreditSum(double sum) {
         creditSum += sum;
     }
 
-    public int getExpenseSum() {
+    public double getExpenseSum() {
         return expenseSum;
     }
 
-    public void setExpenseSum(int sum) {
+   public void setExpenseSum(double sum) {
         expenseSum += sum;
     }
 
-    public int getTotalSum() {
+    public double getTotalSum() {
         return totalSum;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status.toUpperCase();
+    }
 }
