@@ -11,6 +11,9 @@ Returns a list of all reports
 #### /projects/{id} (GET)
 Returns the report with ID {id}  - i.e. /projects/5
 
+#### /projects (POST)
+Adds a report object to database
+
 ## Sample JSON object
 A sample report object returned from a GET request
 
