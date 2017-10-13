@@ -10,39 +10,33 @@ import java.util.Date;
  ** The expense report will consist of one or more expense documents.
  */
 
-@Entity
-@Table(name="expensedoc")
+@Embeddable
+//@Entity
+//@Table(name="expensedocs")
 @Data
 public class ExpenseDoc {
 
-    private int reportId; //which report this document belongs to
+    private int parentId; //which report this document belongs to
 
-    @Id
     @GeneratedValue
     private int docId; //document's ID in the current report
 
-    @Column(name = "date")
     private Date date;
 
-    @Column(name = "issuer")
     private String issuer;
 
-    @Column(name = "content")
     private String content;
 
-    @Column(name = "field")
     private String field;
 
-    @Column(name = "project")
     private String project;
 
-    @Column(name = "sum")
+    //@Column(nullable = true)
     private double sum;
 
-    @Column(name = "currency")
+    //@Enumerated(EnumType.STRING)
     private Currency currency;
 
-    @Column(name = "creditcard")
     private boolean creditCard;
 
     public ExpenseDoc(Date date, String issuer, String content, String field, String project, double sum, Currency currency, boolean creditCard) {
@@ -57,10 +51,9 @@ public class ExpenseDoc {
     }
 
     public ExpenseDoc() {
-        this.date = new Date();
     }
 
-    public double getSumEur() {
+    /*public double getSumEur() {
         return sum*currency.getRate();
-    }
+    }*/
 }

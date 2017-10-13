@@ -1,75 +1,57 @@
 package com.reach_u.expensereport.service;
 
+import com.reach_u.expensereport.Repository.ReportRepository;
 import com.reach_u.expensereport.model.*;
-import com.reach_u.expensereport.model.Currency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.*;
-import java.util.concurrent.atomic.AtomicInteger;
 
 
 /**
- * Database "replacement" for expense reports
- *
- ** Stores all reports in a list.
- *
- ** Adds methods for using report list / single report data.
+ * Methods for using report list / single report data.
  */
+@Service
 public class ReportService {
 
-    private static List<Report> reports = new ArrayList<>();
-    private static List<ExpenseDoc> documents = new ArrayList<>();
-    private AtomicInteger reportCounter = new AtomicInteger();
-    private AtomicInteger expenseDocCounter = new AtomicInteger();
+    @Autowired
+    ReportRepository reportRepository;
 
+    /*@Autowired
+    ExpenseDocRepository expenseDocRepository;*/
 
-    /*
-     * Dummy data creation for testing purposes
-     */
-    {
-        //Create a new Report and add to list
-       reports.add(new Report("Aino Ainus", new Date(), new Date()));
-
-        //Create two Expense documents and add them to the report
-       documents.add(new ExpenseDoc(new Date(), "Radisson", "Housing", "Testing", "ExpRep", 150, Currency.GBP, true));
-       documents.add(new ExpenseDoc(new Date(), "EasyJet", "Travel", "Testing", "ExpRep", 100, Currency.EUR, false));
-       reports.get(0).setDocuments(documents);
-
-       //Set IDs for Report and Expense documents
-       for (Report report : reports) {
-           report.setReportId(reportCounter.incrementAndGet());
-           for (ExpenseDoc doc : report.getDocuments()) {
-               doc.setReportId(reportCounter.get());
-               doc.setDocId(expenseDocCounter.incrementAndGet());
-           }
-           expenseDocCounter.set(0);
-       }
+    //Add an empty report to database with current date and status "Active" for testing purposes
+    public String initialize() {
+        Report test = new Report();
+        List<ExpenseDoc> docs = test.getDocuments();
+        ExpenseDoc test_doc = new ExpenseDoc();
+        docs.add(test_doc);
+        test.setDocuments(docs);
+        reportRepository.save(test);
+        //expenseDocRepository.save(new ExpenseDoc());
+        return "Saved";
     }
-
 
     //Method for getting all Reports with GET
     public List<Report> list() {
+        List<Report> reports = new ArrayList<>();
+        for (Report report : reportRepository.findAll()) {
+            reports.add(report);
+        }
         return reports;
     }
 
     //Method for getting a single Report with GET
     public Report get(int reportId) {
-        for (Report r : reports) {
-            if (r.getReportId() == reportId) {
-                return r;
+        if (reportRepository.findReportByReportId(reportId).getReportId() == reportId) {
+                return reportRepository.findReportByReportId(reportId);
             }
-        }
         return null;
     }
 
     //Method for POST request
     public Report create(Report report) {
-        report.setReportId(reportCounter.incrementAndGet());
-        for (ExpenseDoc doc : report.getDocuments()) {
-            doc.setDocId(expenseDocCounter.incrementAndGet());
-            doc.setReportId(reportCounter.get());
-        }
-        expenseDocCounter.set(0);
-        reports.add(report);
+        reportRepository.save(report);
         return report;
     }
 }

@@ -1,5 +1,10 @@
 package com.reach_u.expensereport.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 public enum Currency {
     EEK (0.06),
     EUR (1.00),
@@ -11,6 +16,8 @@ public enum Currency {
     CHF (0.92),
     RUB (0.01),
     GBP (1.27);
+
+
 
     private double rate;
 
