@@ -3,7 +3,6 @@ package com.reach_u.expensereport.model;
 import lombok.Data;
 
 import javax.persistence.*;
-import javax.validation.OverridesAttribute;
 import java.util.*;
 
 @Entity
@@ -17,10 +16,8 @@ public class Report {
 
     private String employee;
 
-    @Temporal(TemporalType.DATE)
     private Date startDate;
 
-    @Temporal(TemporalType.DATE)
     private Date endDate;
 
     @ElementCollection
@@ -36,6 +33,9 @@ public class Report {
     @Enumerated(EnumType.STRING)
     private ReportStatus status;
 
+    @Column(nullable = true)
+    private double totalSum; //expenseSum - creditSum (in €)
+
     public Report(String employee, Date startDate, Date endDate) {
         this.employee = employee;
         this.startDate = startDate;
@@ -49,22 +49,11 @@ public class Report {
         this.status = ReportStatus.Active;
     }
 
-    /*
-    public void setDocuments(List<ExpenseDoc> documents) {
-        for (ExpenseDoc doc : documents) {
-            this.documents.add(doc);
-            if (doc.isCreditCard()) {
-                this.setCreditSum(doc.getSumEur());
-                this.setExpenseSum(doc.getSumEur());
-            } else {
-                this.setExpenseSum(doc.getSumEur());
-            }
-        }
-    }*/
-
     public void setCreditSum(double sum){ creditSum += sum; }
 
     public void setExpenseSum(double sum) { expenseSum += sum; }
 
-    public double getTotalSum() { return getExpenseSum()-getCreditSum(); } //amount to be paid to employee = expenseSum - creditSum (in €)
+    public double getTotalSum() { return totalSum; }
+
+    public void setTotalSum() { totalSum = getExpenseSum()-getCreditSum(); }
 }

@@ -11,12 +11,8 @@ import java.util.Date;
  */
 
 @Embeddable
-//@Entity
-//@Table(name="expensedocs")
 @Data
 public class ExpenseDoc {
-
-    //private int parentId; //which report this document belongs to
 
     @GeneratedValue
     private int docId; //document's ID in the current report
@@ -31,13 +27,14 @@ public class ExpenseDoc {
 
     private String project;
 
-    //@Column(nullable = true)
     private double sum;
 
-    //@Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.STRING)
     private Currency currency;
 
     private boolean creditCard;
+
+    private double sumEur;
 
     public ExpenseDoc(Date date, String issuer, String content, String field, String project, double sum, Currency currency, boolean creditCard) {
         this.date = date;
@@ -53,7 +50,10 @@ public class ExpenseDoc {
     public ExpenseDoc() {
     }
 
-    /*public double getSumEur() {
-        return sum*currency.getRate();
-    }*/
+    public double getSumEur() {
+        return sumEur;
+    }
+    public void setSumEur() {
+        sumEur = sum*currency.getRate();
+    }
 }

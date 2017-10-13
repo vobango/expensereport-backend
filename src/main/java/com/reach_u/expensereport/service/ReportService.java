@@ -55,7 +55,19 @@ public class ReportService {
     public Report create(Report report) {
         for (ExpenseDoc doc : report.getDocuments()) {
             doc.setDocId(docIdCounter.incrementAndGet());
+            if (doc.getDate() == null) {
+                doc.setDate(new Date());
+            }
+            doc.setSumEur();
+            if (doc.isCreditCard()) {
+                report.setCreditSum(doc.getSumEur());
+                report.setExpenseSum(doc.getSumEur());
+            }
+            else {
+                report.setExpenseSum(doc.getSumEur());
+            }
         }
+        report.setTotalSum();
         docIdCounter.set(0);
         reportRepository.save(report);
         return report;
