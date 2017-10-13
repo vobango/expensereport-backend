@@ -21,7 +21,7 @@ public class ReportService {
     AtomicInteger docIdCounter = new AtomicInteger();
 
     //Add an empty report to database with current date, status "Active" and empty expense document for testing purposes
-    public String initialize() {
+    /*public String initialize() {
         Report test = new Report();
         List<ExpenseDoc> docs = test.getDocuments();
         docs.add(new ExpenseDoc());
@@ -32,7 +32,7 @@ public class ReportService {
         test.setDocuments(docs);
         reportRepository.save(test);
         return "Saved";
-    }
+    }*/
 
     //Method for getting all Reports with GET
     public List<Report> list() {
