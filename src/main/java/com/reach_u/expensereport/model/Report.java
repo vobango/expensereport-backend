@@ -54,7 +54,7 @@ public class Report {
     public void setDocuments(List<ExpenseDoc> documents) {
         for (ExpenseDoc doc : documents) {
             this.documents.add(doc);
-            if (doc.getCreditCard()) {
+            if (doc.isCreditCard()) {
                 this.setCreditSum(doc.getSumEur());
                 this.setExpenseSum(doc.getSumEur());
             } else {
