@@ -3,6 +3,7 @@ package com.reach_u.expensereport.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.OverridesAttribute;
 import java.util.*;
 
 @Entity
@@ -23,7 +24,7 @@ public class Report {
     private Date endDate;
 
     @ElementCollection
-    @CollectionTable(joinColumns = @JoinColumn(name = "parentId"))
+    @CollectionTable(joinColumns = @JoinColumn(name = "Id"))
     private List<ExpenseDoc> documents = new ArrayList<>();
 
     @Column(nullable = true)
