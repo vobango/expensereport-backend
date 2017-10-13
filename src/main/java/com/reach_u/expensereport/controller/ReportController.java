@@ -29,9 +29,11 @@ public class ReportController {
         reportService.create(report);
         return report;
     }
-    @RequestMapping("/save")
+
+    //For creating dummy data
+    /*@RequestMapping("/save")
     public String process() {
         return reportService.initialize();
-    }
+    }*/
 
 }
