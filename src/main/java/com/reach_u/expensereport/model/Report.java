@@ -1,17 +1,38 @@
 package com.reach_u.expensereport.model;
 
+import lombok.Data;
+
+import javax.persistence.*;
 import java.util.*;
 
+@Entity
+@Table(name = "reports")
+@Data
 public class Report {
 
+    @Id
+    @GeneratedValue
     private int reportId;
+
     private String employee;
+
+    @Temporal(TemporalType.DATE)
     private Date startDate;
+
+    @Temporal(TemporalType.DATE)
     private Date endDate;
+
+    @ElementCollection
+    @CollectionTable(joinColumns = @JoinColumn(name = "parentId"))
     private List<ExpenseDoc> documents = new ArrayList<>();
+
+    @Column(nullable = true)
     private double expenseSum; //employee's total expenses
+
+    @Column(nullable = true)
     private double creditSum; //amount paid with credit card
-    private double totalSum; //amount to be paid to employee = expenseSum - creditSum (in €)
+
+    @Enumerated(EnumType.STRING)
     private ReportStatus status;
 
     public Report(String employee, Date startDate, Date endDate) {
@@ -22,63 +43,27 @@ public class Report {
     }
 
     public Report() {
-        this.status = ReportStatus.Active;
         this.startDate = new Date();
         this.endDate = new Date();
+        this.status = ReportStatus.Active;
     }
 
-    public int getReportId() {
-        return reportId;
-    }
-
-    public void setReportId(int reportId) {
-        this.reportId = reportId;
-    }
-
-    public String getEmployee() {
-        return employee;
-    }
-
-    public Date getStartDate() {
-        return startDate;
-    }
-
-    public Date getEndDate() {
-        return endDate;
-    }
-
-    public List<ExpenseDoc> getDocuments() {
-        return documents;
-    }
-
+    /*
     public void setDocuments(List<ExpenseDoc> documents) {
         for (ExpenseDoc doc : documents) {
             this.documents.add(doc);
-            if (doc.getCreditCard()) {
+            if (doc.isCreditCard()) {
                 this.setCreditSum(doc.getSumEur());
                 this.setExpenseSum(doc.getSumEur());
             } else {
                 this.setExpenseSum(doc.getSumEur());
-                this.setTotalSum(doc.getSumEur());
             }
         }
-    }
-
-    public double getCreditSum() { return creditSum; }
+    }*/
 
     public void setCreditSum(double sum){ creditSum += sum; }
 
-    public double getExpenseSum() { return expenseSum; }
-
     public void setExpenseSum(double sum) { expenseSum += sum; }
 
-    public double getTotalSum() { return totalSum; }
-
-    public void setTotalSum(double sum) { this.totalSum += sum; }
-
-    public ReportStatus getStatus() { return status; }
-
-    public void setStatus(ReportStatus status) {
-        this.status = status;
-    }
+    public double getTotalSum() { return getExpenseSum()-getCreditSum(); } //amount to be paid to employee = expenseSum - creditSum (in €)
 }
