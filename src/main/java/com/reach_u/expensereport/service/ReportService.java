@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 
 /**
@@ -17,18 +18,19 @@ public class ReportService {
     @Autowired
     ReportRepository reportRepository;
 
-    /*@Autowired
-    ExpenseDocRepository expenseDocRepository;*/
+    AtomicInteger docIdCounter = new AtomicInteger();
 
-    //Add an empty report to database with current date and status "Active" for testing purposes
+    //Add an empty report to database with current date, status "Active" and empty expense document for testing purposes
     public String initialize() {
         Report test = new Report();
         List<ExpenseDoc> docs = test.getDocuments();
-        ExpenseDoc test_doc = new ExpenseDoc();
-        docs.add(test_doc);
+        docs.add(new ExpenseDoc());
+        for (ExpenseDoc doc : docs) {
+            doc.setDocId(docIdCounter.incrementAndGet());
+        }
+        docIdCounter.set(0);
         test.setDocuments(docs);
         reportRepository.save(test);
-        //expenseDocRepository.save(new ExpenseDoc());
         return "Saved";
     }
 
@@ -51,6 +53,10 @@ public class ReportService {
 
     //Method for POST request
     public Report create(Report report) {
+        for (ExpenseDoc doc : report.getDocuments()) {
+            doc.setDocId(docIdCounter.incrementAndGet());
+        }
+        docIdCounter.set(0);
         reportRepository.save(report);
         return report;
     }

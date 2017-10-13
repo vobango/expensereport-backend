@@ -16,7 +16,7 @@ import java.util.Date;
 @Data
 public class ExpenseDoc {
 
-    private int parentId; //which report this document belongs to
+    //private int parentId; //which report this document belongs to
 
     @GeneratedValue
     private int docId; //document's ID in the current report
