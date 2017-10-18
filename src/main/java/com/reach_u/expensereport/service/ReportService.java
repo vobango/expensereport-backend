@@ -46,10 +46,20 @@ public class ReportService {
     //Method for getting a single Report with GET
     public Report get(int reportId) {
         if (reportRepository.findReportByReportId(reportId).getReportId() == reportId) {
-                return reportRepository.findReportByReportId(reportId);
-            }
+            return reportRepository.findReportByReportId(reportId);
+        }
         return null;
     }
+
+    //Method for deleting a single Report with DELETE
+    public void deleteReportById(int reportId) {
+        Report report = get(reportId);
+        if (report != null) {
+            reportRepository.delete(report);
+        }
+
+    }
+
 
     //Method for POST request
     public Report create(Report report) {
@@ -62,8 +72,7 @@ public class ReportService {
             if (doc.isCreditCard()) {
                 report.setCreditSum(doc.getSumEur());
                 report.setExpenseSum(doc.getSumEur());
-            }
-            else {
+            } else {
                 report.setExpenseSum(doc.getSumEur());
             }
         }

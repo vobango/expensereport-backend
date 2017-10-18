@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 public class ReportController {
 
     @Autowired
@@ -28,6 +29,13 @@ public class ReportController {
     public Report createReport(@RequestBody Report report) {
         reportService.create(report);
         return report;
+
+    }
+
+    @DeleteMapping("/reports/{id}")
+    public Report deleteReport(@PathVariable("id") int id) {
+        reportService.deleteReportById(id);
+        return null;
     }
 
     //For creating dummy data

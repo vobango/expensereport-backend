@@ -49,11 +49,19 @@ public class Report {
         this.status = ReportStatus.Active;
     }
 
-    public void setCreditSum(double sum){ creditSum += sum; }
+    public void setCreditSum(double sum) {
+        creditSum += sum;
+    }
 
-    public void setExpenseSum(double sum) { expenseSum += sum; }
+    public void setExpenseSum(double sum) {
+        expenseSum += sum;
+    }
 
-    public double getTotalSum() { return totalSum; }
+    public double getTotalSum() {
+        return totalSum;
+    }
 
-    public void setTotalSum() { totalSum = getExpenseSum()-getCreditSum(); }
+    public void setTotalSum() {
+        totalSum = getExpenseSum() - getCreditSum();
+    }
 }
