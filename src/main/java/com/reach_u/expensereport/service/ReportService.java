@@ -60,6 +60,12 @@ public class ReportService {
 
     }
 
+    //Method for editing a Report with PUT
+    public Report updateReport(Report report, int id) {
+        return reportRepository.save(report);
+
+    }
+
 
     //Method for POST request
     public Report create(Report report) {
