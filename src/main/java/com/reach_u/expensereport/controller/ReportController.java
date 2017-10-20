@@ -1,6 +1,5 @@
 package com.reach_u.expensereport.controller;
 
-
 import com.reach_u.expensereport.model.Report;
 import com.reach_u.expensereport.service.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,19 +28,22 @@ public class ReportController {
     public Report createReport(@RequestBody Report report) {
         reportService.create(report);
         return report;
-
     }
 
     @DeleteMapping("/reports/{id}")
-    public Report deleteReport(@PathVariable("id") int id) {
+    public Boolean deleteReport(@PathVariable("id") int id) {
         reportService.deleteReportById(id);
-        return null;
+        return true;
     }
 
+    @PutMapping("/reports/{id}")
+    public Report updateReport(@RequestBody Report report, @PathVariable("id") int id) {
+        return reportService.updateReport(report, id);
+
+    }
     //For creating dummy data
     /*@RequestMapping("/save")
     public String process() {
         return reportService.initialize();
     }*/
-
 }
